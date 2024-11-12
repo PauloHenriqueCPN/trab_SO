@@ -26,8 +26,7 @@ menu() {
     echo "# -------------------------------------------------------------------#"
     echo "# $(format "Equipe Desenvolvedora:")"
     echo "# $(format "Aluno: Paulo Henrique Costa Pereira Nunes")"
-    echo "# $(format "Aluno: Vitor Faranji")"
-    echo "# $(format "Aluno: José Pedro")"
+    echo "# $(format "Aluno: Vitor Farani Barbosa")"
     echo "# -------------------------------------------------------------------#"
     echo "# $(format "Rio de Janeiro, $(date "+%d de %B de %Y")")"
     echo "# $(format "Hora do Sistema: $(date "+%H Horas e %M Minutos")")"
@@ -36,7 +35,7 @@ menu() {
     echo "Menu de Escolhas:"
     echo "1) Corrida de Cavalos"
     echo "2) Lanchonete"
-    echo "3) Banco"
+    echo "3) Forca"
     echo "4) --Em obra--"
     echo "5) Finalizar o programa."
     echo ""
@@ -663,7 +662,15 @@ parte3=(
            			       |           o|   ´´´´   |   \__/
                                        |            |          |'
 
-
+)
+parte4=(
+	''
+	'.'
+	'..'
+	'...'
+	'....'
+	'.....'
+	'É...'
 )
 
 for animacao in "${parte1[@]}"; do
@@ -684,6 +691,350 @@ for anime in "${parte3[@]}"; do
 	echo "$anime"
 	sleep 2.5
 done
+
+for anim in "${parte4[@]}"; do
+	clear
+	echo "$anim"
+	sleep 0.8
+done
+sleep 1
+echo "Parece que o aviso de obra era de verdade..."
+sleep 3
+}
+
+lanchonete() {
+clear
+echo "
+
+Você entra no FP's lanches e vai para o balcão"
+sleep 4
+clear
+echo "
+
+Quando você termina de fazer o pedido percebe que não tem dinheiro"
+sleep 5
+clear
+echo "
+
+O atendente então chama o segurança. Ele te joga para fora igual um saco de batatas"
+sleep 5
+clear
+echo "
+
+Então, enquanto está no chão, você escuta a voz de uma criança"
+sleep 5
+clear
+echo "
+
+'Olha mamãe! Um mendigo! Vamos ajudar ele!'"
+sleep 5
+clear
+echo "
+
+A mãe então tira uma nota de 100 reais da bolsa e fala para você:"
+sleep 5
+clear
+echo "
+
+'Eu sei que não é muito mas pode ficar'"
+sleep 5
+clear
+echo "
+
+Você então percebe que eles estão usando roupas de luxo e que essa nota não é nada para eles"
+sleep 6
+clear
+echo "
+
+Mas isso não importa."
+sleep 3
+clear
+echo "
+
+VAMOS COMER!"
+sleep 2
+clear
+
+conta=100
+cardapio() {
+clear
+echo "
+Conta: $conta
+
+
+1) Refrigerante
+2) Hamburguer
+3) Acompanhamento
+4) Sobremesa
+5) Combos
+6) Sair"
+echo ""
+read -p "Escolha seu pedido: " pedido
+
+case $pedido in
+    1) refri ;;
+    2) hamb ;;
+    3) acompa ;;
+    4) sobr ;;
+    5) combo ;;
+    6) menu ;;
+    *) echo "Quer ser expulso denovo?" ;;
+esac
+}
+
+refri() {
+	clear
+	echo '
+1) Coca-cola           $10
+2) Guaraná             $10
+3) Suco de Laranja     $12
+4) Suco de Uva         $11
+5) Água                $8'
+	echo ""
+	read -p "Escolha sua bebida: " goro
+
+	case $goro in
+		1) echo "Voce escolheu coca"; saldo 10 ; cardapio ;;
+		2) echo "Voce escolheu guarana"; saldo 10 ; cardapio ;;
+		3) echo "Voce escolheu suco de laranja"; saldo 12 ; cardapio ;;
+		4) echo "Voce escolheu suco de uva"; saldo 11 ; cardapio ;;
+		5) echo "Voce escolheu agua"; saldo 8 ; cardapio ;;
+		*) echo "Voce quer lamber o chao?" ;;
+	esac
+}
+
+hamb() {
+    clear
+    echo '
+1) Cheeseburger       $15
+2) Bacon Burger       $18
+3) Cheddar Burger     $12
+4) Double Burger      $20
+5) Chicken Burger     $16'
+    echo ""
+
+    read -p "Escolha seu hambúrguer: " burgao
+
+    case $burgao in
+        1) echo "Você escolheu Cheeseburger"; saldo 15; cardapio ;;
+        2) echo "Você escolheu Bacon Burger"; saldo 18; cardapio ;;
+        3) echo "Você escolheu Cheddar Burger"; saldo 12; cardapio ;;
+        4) echo "Você escolheu Double Burger"; saldo 20; cardapio ;;
+        5) echo "Você escolheu Chicken Burger"; saldo 16; cardapio ;;
+	*) echo "Quer meu sapato na sua boca?" ;;
+    esac
+}
+
+acompa() {
+    clear
+    echo '
+1) Batata Frita       $8
+2) Onion Rings        $7
+3) Salada             $6
+4) Nuggets            $9
+5) Molho              $5'
+    echo ""
+
+    read -p "Escolha seu acompanhamento: " nhamento
+
+    case $nhamento in
+        1) echo "Você escolheu Batata Frita"; saldo 8; cardapio ;;
+        2) echo "Você escolheu Onion Rings"; saldo 7; cardapio ;;
+        3) echo "Você escolheu Salada"; saldo 6; cardapio ;;
+        4) echo "Você escolheu Nuggets"; saldo 9; cardapio ;;
+        5) echo "Você escolheu Molho"; saldo 5; cardapio ;;
+        *) echo "Você vai acompanhar meu punho na sua cara" ;;
+    esac
+}
+
+sobr() {
+    clear
+    echo '
+1) Sorvete            $5
+2) Sunday             $8
+3) Torta de Limão     $7
+4) Brownie            $8
+5) Milkshake          $10'
+    echo ""
+
+    read -p "Escolha sua sobremesa: " sobra
+
+    case $sobra in
+        1) echo "Você escolheu Sorvete"; saldo 5; cardapio ;;
+        2) echo "Você escolheu Sunday"; saldo 8; cardapio ;;
+        3) echo "Você escolheu Torta de Limão"; saldo 7; cardapio ;;
+        4) echo "Você escolheu Brownie"; saldo 8; cardapio ;;
+        5) echo "Você escolheu Milkshake"; saldo 10; cardapio ;;
+        *) echo "Vai saborear a parede" ;;
+    esac
+}
+
+combo() {
+    clear
+    echo '
+1) Combo 1 (Burger + Refrigerante)            $20
+2) Combo 2 (Burger + Acompanhamento)          $22
+3) Combo 3 (Burger + Acompanhamento + Refri)  $30
+4) Combo 4 (Tudo incluso)                     $40
+5) Combo 5 (Tudo e nada)                      $35'
+    echo ""
+
+    read -p "Escolha seu combo: " combada
+
+    case $combada in
+        1) echo "Você escolheu Combo 1"; saldo 20; cardapio ;;
+        2) echo "Você escolheu Combo 2"; saldo 22; cardapio ;;
+        3) echo "Você escolheu Combo 3"; saldo 30; cardapio ;;
+        4) echo "Você escolheu Combo 4"; saldo 40; cardapio ;;
+        5) echo "Você escolheu Combo 5"; saldo 35; cardapio ;;
+        *) echo "Voce vai tomar um combo de tapas" ;;
+    esac
+}
+
+saldo() {
+    if (( conta >= $1 )); then
+        conta=$((conta - $1))
+        cardapio
+    else
+	clear
+	echo "Saia daqui seu pobre!"
+	sleep 2
+        cardapio
+    fi
+}
+
+cardapio
+
+}
+
+forca() {
+clear
+PALAVRAS=("baleia" "cavalo" "paulo" "vitor" "paralelepipedo" "dangobalango" "salamangotango")
+
+PALAVRA_SECRETA=${PALAVRAS[$RANDOM % ${#PALAVRAS[@]}]}
+TAMANHO=${#PALAVRA_SECRETA}
+
+VIDAS=6
+LETRAS_ADIVINHADAS=()
+PALAVRA_ATUAL=$(printf "_%.0s" $(seq 1 $TAMANHO))
+
+desenhar_boneco() {
+    case $1 in
+        6) echo "
+          -----
+          |    
+          |
+          |
+          |
+          |
+        =======" ;;
+        5) echo "
+          -----
+          |   O
+          |
+          |
+          |
+          |
+        =======" ;;
+        4) echo "
+          -----
+          |   O
+          |   |
+          |
+          |
+          |
+        =======" ;;
+        3) echo "
+          -----
+          |   O
+          |  /|
+          |
+          |
+          |
+        =======" ;;
+        2) echo "
+          -----
+          |   O
+          |  /|\\
+          |
+          |
+          |
+        =======" ;;
+        1) echo "
+          -----
+          |   O
+          |  /|\\
+          |  /
+          |
+          |
+        =======" ;;
+        0) echo "
+          -----
+          |   O
+          |  /|\\
+          |  / \\
+          |
+          |
+        =======" ;;
+    esac
+}
+
+mostrar_status() {
+    desenhar_boneco $VIDAS
+    echo "Palavra: $PALAVRA_ATUAL"
+    echo "Vidas restantes: $VIDAS"
+    echo "Letras tentadas: ${LETRAS_ADIVINHADAS[@]}"
+    echo ""
+}
+
+verificar_letra() {
+    local letra=$1
+    local acertou=1
+    for (( i=0; i<$TAMANHO; i++ )); do
+        if [[ ${PALAVRA_SECRETA:$i:1} == "$letra" ]]; then
+            PALAVRA_ATUAL=$(echo "$PALAVRA_ATUAL" | sed "s/./$letra/$((i+1))")
+            acertou=0
+        fi
+    done
+    return $acertou
+}
+
+while [[ "$PALAVRA_ATUAL" != "$PALAVRA_SECRETA" && $VIDAS -gt 0 ]]; do
+    mostrar_status
+    read -p "Digite uma letra: " letra
+
+    if [[ " ${LETRAS_ADIVINHADAS[@]} " =~ " $letra " ]]; then
+	clear
+        echo "Você já tentou essa letra idiota"
+        continue
+    fi
+
+    LETRAS_ADIVINHADAS+=("$letra")
+
+    if verificar_letra "$letra"; then
+	clear
+        echo "Acertou!"
+    else
+	clear
+        echo "Errou! A letra $letra nem existe"
+        VIDAS=$((VIDAS - 1))
+    fi
+done
+
+if [[ "$PALAVRA_ATUAL" == "$PALAVRA_SECRETA" ]]; then
+	clear
+    echo "Sorte a sua! Você descobriu a palavra: $PALAVRA_SECRETA"
+    sleep 3
+    menu
+else
+    desenhar_boneco 0
+    clear
+    echo "Otario! A palavra era: $PALAVRA_SECRETA"
+    sleep 3
+    menu
+fi
+
+
 }
 
 start() {
@@ -694,8 +1045,8 @@ start() {
 
         case $escolha in
             1) corrida ;;
-            2) echo "Vai ter"; sleep 1 ;;
-            3) echo "Vai ter"; sleep 1 ;;
+            2) lanchonete ;;
+            3) forca ;;
             4) obra ;;
 	    5) echo "Finalizando..."; sleep 1; break ;;
             *) echo "ALERTA! ALERTA!"; sleep 1; echo "BURRO DETECTADO"; sleep 2.5
