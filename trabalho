@@ -1,7 +1,7 @@
 #!/bin/bash
 menu() {
     clear
-    _ano=$(date +"%Y")
+    ano=$(date +"%Y")
     mes=$(date +"%m")
 
     if [[ "$mes" -le 6 ]]; then
@@ -10,35 +10,60 @@ menu() {
         semestre="2"
     fi
 
-    linha=63
+    mensagem=(
+        "IBMEC"
+        "Sistemas Operacionais                  Semestre $semestre de $ano"
+        "Código: IBM0940                        Turma: 8001"
+        "Professor: Luiz Fernando T. de Farias"
+        "--------------------------------------------------------------"
+        "Equipe Desenvolvedora:"
+        "Aluno: Paulo Henrique Costa Pereira Nunes"
+        "Aluno: Vitor Farani Barbosa"
+        "--------------------------------------------------------------"
+        "Rio de Janeiro, $(date "+%d de %B de %Y")"
+        "Hora do Sistema: $(date "+%H Horas e %M Minutos")"
+    )
+
+    max=0
+    for msg in "${mensagem[@]}"; do
+	    if (( ${#msg} > max )); then
+            max=${#msg}
+	    fi
+    done
+
+    max=$((max + 4))
 
     format() {
-        texto="$1"
-        largura=$((linha - ${#texto} - 3))
-        printf "%s%${largura}s#\n" "$texto" ""
+	    texto="$1"
+	    largura=$((max - 2))
+	    printf "# %-*s#\n" "$largura" "$texto"
     }
 
-    echo "#####################################################################"
-    echo "# $(format "IBMEC")"
-    echo "# $(format "Sistemas Operacionais                Semestre $semestre de $_ano")"
-    echo "# $(format "Código: IBM0940                                  Turma: 8001")"
-    echo "# $(format "Professor: Luiz Fernando T. de Farias")"
-    echo "# -------------------------------------------------------------------#"
-    echo "# $(format "Equipe Desenvolvedora:")"
-    echo "# $(format "Aluno: Paulo Henrique Costa Pereira Nunes")"
-    echo "# $(format "Aluno: Vitor Farani Barbosa")"
-    echo "# -------------------------------------------------------------------#"
-    echo "# $(format "Rio de Janeiro, $(date "+%d de %B de %Y")")"
-    echo "# $(format "Hora do Sistema: $(date "+%H Horas e %M Minutos")")"
-    echo "#####################################################################"
+    separa() {
+	    separador="-"
+	    largura=$((max - 2))
+	    printf "# %s#\n"  "$(printf "%-${largura}s" | tr ' ' "$separador")"
+    }
+
+    printf "%${max}s\n" | tr ' ' '#'
+    for msg in "${mensagem[@]}"; do
+	    if [[ "$msg" =~ ^[-]+$ ]]; then
+		    separa
+	    else
+		    format "$msg"
+	    fi
+    done
+    printf "%${max}s\n" | tr ' ' '#'
+
     echo ""
     echo "Menu de Escolhas:"
-    echo "1) Corrida de Cavalos"
-    echo "2) Lanchonete"
-    echo "3) Forca"
-    echo "4) --Em obra--"
-    echo "5) Finalizar o programa."
+    echo "  1) Corrida de Cavalos"
+    echo "  2) Lanchonete"
+    echo "  3) Forca"
+    echo "  4) --Em Obra--"
+    echo "  5) Finalizar o programa."
     echo ""
+
 }
 
 corrida() {
@@ -1054,6 +1079,19 @@ start() {
         echo ""
     done
 }
+
+c() {
+    echo "
+    
+Nã na ni na não"
+sleep 2
+clear
+start
+
+}
+
+trap c SIGINT SIGTSTP
+	
 
 start
 
